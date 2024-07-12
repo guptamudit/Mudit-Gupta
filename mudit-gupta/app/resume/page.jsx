@@ -71,13 +71,13 @@ const education = {
     "I am currently an UnderGrad Student learning Computer Sciences in my University. I also learn using Online Courses.",
   items: [
     {
-      institution: "Salwan Public School, TDSC",
-      degree: "Class X (Secondary School)",
+      institution: "Salwan Public School",
+      degree: "Class X ",
       duration: "2018 - 2019",
     },
     {
-      institution: "Salwan Public School, TDSC",
-      degree: "Class XII (Senior Secondary School)",
+      institution: "Salwan Public School",
+      degree: "Class XII ",
       duration: "2020 - 2021",
     },
     {
@@ -187,12 +187,12 @@ const Resume = () => {
         opacity: 1,
         transition: { delay: 2.4, duration: 0.4, ease: "easeIn" },
       }}
-      className="min-h-[80vh] xl:mt-10 xl:ml-5 flex items-center justify-center py-12 xl:py-0"
+      className="min-h-[80vh] xl:mt-3 xl:ml-5 flex items-center justify-center py-12 xl:py-0"
     >
       <div className="conatainer mx-auto">
         <Tabs
           defaultValue="experience"
-          className="flex flex-col xl:flex-row gap-[60px]"
+          className="flex flex-col xl:flex-row gap-[30px]"
         >
           <TabsList className="flex flex-col  w-[380px] xl:w-[520px] mx-auto xl:mx-0 gap-6">
             <TabsTrigger value="experience">Experience</TabsTrigger>
@@ -216,7 +216,7 @@ const Resume = () => {
                       return (
                         <li
                           key={index}
-                          className="bg-[#232329] h-[150px] py-6 px-10 rounded-xl flex flex-col justify-center items-center lg:items-start"
+                          className="bg-[#232329] h-[150px] py-6 px-10 rounded-xl flex flex-col justify-center items-center lg:items-start "
                         >
                           <span className="text-accent ">{item.positon}</span>
                           <p className="text-sm">{item.duration}</p>
@@ -245,7 +245,7 @@ const Resume = () => {
                       return (
                         <li
                           key={index}
-                          className="bg-[#232329] h-[150px] py-6 px-10 rounded-xl flex flex-col justify-center items-center lg:items-start"
+                          className="bg-[#232329] h-[140px] xl:w-[350px] py-6 px-5 rounded-xl flex flex-col justify-center items-center lg:items-start"
                         >
                           <span className="text-accent ">
                             {item.institution}
