@@ -177,7 +177,6 @@ const Work = () => {
                           src={project.image}
                           fill
                           className="object-cover rounded-lg "
-                          alt
                         />
                       </div>
                     </div>
