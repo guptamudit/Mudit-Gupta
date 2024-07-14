@@ -17,6 +17,7 @@ import {
 
 import Link from "next/link";
 import Image from "next/image";
+import WorkSliderBtns from "@/components/WorkSliderBtns";
 
 const projects = [
   {
@@ -36,11 +37,11 @@ const projects = [
     github: "https://github.com/guptamudit/GetHired",
   },
   {
-    num: "01",
+    num: "02",
     category: "RESUME BUILDER",
     title: "Project 2",
     description:
-      "Designed and developed a dynamic and user-friendly resume builder web application using React, providing individuals with an intuitive platform to create professional resumes effortlessly. Users have the convenience of effortlessly generating and downloading their Resume/CV in a polished PDF format.",
+      "Designed and developed a dynamic and user-friendly resume builder web application using React, providing individuals with an intuitive platform to create professional resumes effortlessly. ",
     stack: [
       { name: "JavaScript" },
       { name: "ReactJS" },
@@ -51,7 +52,7 @@ const projects = [
     github: "https://github.com/guptamudit/Resume-Builder",
   },
   {
-    num: "01",
+    num: "03",
     category: "TWO-GOOD COMPANY",
     title: "Project 3",
     description:
@@ -67,11 +68,11 @@ const projects = [
     github: "https://github.com/guptamudit/Two-good-company",
   },
   {
-    num: "01",
+    num: "04",
     category: "LIVE WHITEBOARD SHARING",
     title: "Project 4",
     description:
-      "I Created a live Whiteboard sharing web application to encourage Realtime learning and collaboration between teachers and students.",
+      "Created a live Whiteboard sharing web application to encourage learning and collaboration between teachers and students.",
     stack: [
       { name: "JavaScript" },
       { name: "React" },
@@ -86,19 +87,25 @@ const projects = [
 
 const Work = () => {
   const [project, setProject] = useState(projects[0]);
+
+  const handleSlideChange = (swiper) => {
+    const currentIndex = swiper.activeIndex;
+    setProject(projects[currentIndex]);
+  };
+
   return (
     <motion.section
       initial={{ opacity: 0 }}
       animate={{
         opacity: 1,
-        // transition: { delay: 2.4, duration: 0.4, ease: "easeIn" },
+        transition: { delay: 2.4, duration: 0.4, ease: "easeIn" },
       }}
-      className="min-h-[80vh] flex flex-col justify-center py-12 xl:px-0"
+      className="min-h-[80vh] flex flex-col justify-center py-3 xl:py-5 xl:px-0"
     >
       <div className="container mx-auto">
         <div className="flex flex-col xl:flex-row gap-[30px] ">
           <div className="w-full xl:w-[50%] xl:h-[460px]  flex flex-col xl:justify-between  order-2 xl:order-none">
-            <div>
+            <div className="flex flex-col gap-[15px] ">
               {/* outline number */}
               <div className="text-8xl leading-none font-bold text-trasnsparent text-outline 	">
                 {project.num}
@@ -123,7 +130,7 @@ const Work = () => {
               {/* border */}
               <div className="border border-white/20"></div>
               {/* buttons */}
-              <div>
+              <div className="flex invert-0 gap-4">
                 <Link href={project.live}>
                   <TooltipProvider delayDuration={100}>
                     <Tooltip>
@@ -151,7 +158,39 @@ const Work = () => {
               </div>
             </div>
           </div>
-          <div className="w-full xl:w-[50%]">Area</div>
+          <div className="w-full  xl:w-[50%] ">
+            <Swiper
+              spaceBetween={30}
+              slidesPerView={1}
+              onSlideChange={handleSlideChange}
+              className="xl:h-[520px] mb-0"
+            >
+              {projects.map((project, index) => {
+                return (
+                  <SwiperSlide key={index} className="w-full">
+                    <div className="h-[360px] rounded-md relative group flex justify-center items-center bg-pink-50/20 ">
+                      {/* overlay */}
+                      <div className=" absolute top-0 bottom-0 w-full h-full"></div>
+                      {/* image  */}
+                      <div className="relative w-full h-full bg-black/10 z-10">
+                        <Image
+                          src={project.image}
+                          fill
+                          className="object-cover rounded-lg "
+                          alt
+                        />
+                      </div>
+                    </div>
+                    <WorkSliderBtns
+                      btnStyles="bg-accent hover:bg-accent-hover text-primary text-[22px] w-[34px] h-[34px] rounded-full flex justify-center items-center transition-all "
+                      containerStyles="flex xl:justify-end justify-start gap-2 xl:mt-4 mt-3"
+                    />
+                  </SwiperSlide>
+                );
+              })}
+              {/* slider buttons */}
+            </Swiper>
+          </div>
         </div>
       </div>
     </motion.section>
