@@ -177,7 +177,6 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { easeIn, easeInOut, motion } from "framer-motion";
-import { Item } from "@radix-ui/react-select";
 
 const Resume = () => {
   return (

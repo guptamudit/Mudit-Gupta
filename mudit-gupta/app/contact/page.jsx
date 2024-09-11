@@ -25,11 +25,36 @@ import { Input } from "@/components/ui/input";
 
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 const Contact = () => {
-  const handleclick = (e) => {
-    e.preventDefault();
-    alert("Form submitted Successfully");
+  const [data, setData] = useState({});
+
+  const handleInput = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
   };
+
+  const addData = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("/api/mongo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      if (response.ok) {
+        alert("Message Sent");
+        setData({});
+      } else {
+        alert("Error");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -44,7 +69,7 @@ const Contact = () => {
           {/* form */}
           <div className="xl:h-[54%] order-2 xl:order-none">
             <form
-              action=""
+              onSubmit={addData}
               className="flex flex-col gap-3 p-8 bg-[#27272c] rounded-xl"
             >
               <h3 className="text-4xl text-accent">Let,s Work Together</h3>
@@ -54,21 +79,45 @@ const Contact = () => {
               </p>
               {/* input */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
-                <Input type="firstname" placeholder="First Name" />
-                <Input type="lastname" placeholder="Last Name" />
-                <Input type="email" placeholder="Email" />
-                <Input type="phone" placeholder="Phone Number" />
+                <Input
+                  type="firstname"
+                  placeholder="First Name"
+                  value={data?.firstname || ""}
+                  onChange={handleInput}
+                  name="firstname"
+                />
+                <Input
+                  type="lastname"
+                  name="lastname"
+                  placeholder="Last Name"
+                  value={data?.lastname || ""}
+                  onChange={handleInput}
+                />
+                <Input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  value={data?.email || ""}
+                  onChange={handleInput}
+                />
+                <Input
+                  type="phone"
+                  name="phone"
+                  placeholder="Phone Number"
+                  value={data?.phone || ""}
+                  onChange={handleInput}
+                />
               </div>
               {/* textarea */}
               <Textarea
                 className="h-[80px]"
                 placeholder="Type your message here!"
+                value={data?.text || ""}
+                onChange={handleInput}
+                name="text"
               ></Textarea>
               {/* button */}
-              <Button
-                className="xl:max-w-40 max-w-[200px]"
-                onClick={handleclick}
-              >
+              <Button className="xl:max-w-40 max-w-[200px]" type="submit">
                 Send Message
               </Button>
             </form>
